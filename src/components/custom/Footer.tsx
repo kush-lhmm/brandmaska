@@ -129,7 +129,7 @@ const Footer = () => {
                                 <div className="flex items-center justify-center w-8 h-8 bg-gray-100 rounded-full mr-3 group-hover:bg-gray-200 transition-colors">
                                     <Mail className="h-4 w-4 text-black" />
                                 </div>
-                                <span>contact@brandmaska.com</span>
+                                <span>hello@lhmm.in</span>
                             </Link>
                         </div>
 

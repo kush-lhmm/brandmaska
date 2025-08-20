@@ -87,7 +87,7 @@ const AboutPage = () => {
             whileHover={{ scale: 1.05, rotate: 2 }}
             transition={{ type: "spring", stiffness: 300, damping: 15 }}
           >
-            <Image src="/team.png" alt='BrandMaska Team' width={600} height={600} className='object-contain border-4 border-yellow-500 shadow-md mx-auto rounded-xl' priority />
+            <Image src="/team.jpg" alt='BrandMaska Team' width={600} height={600} className='object-contain border-4 border-yellow-500 shadow-md mx-auto rounded-xl' priority />
           </motion.div>
 
           {/* About Content */}

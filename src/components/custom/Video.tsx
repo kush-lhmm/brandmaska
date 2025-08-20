@@ -30,7 +30,7 @@ export default function ScrollVideoHero() {
             ease: "none",
             scrollTrigger: {
               trigger: sectionRef.current!,
-              start: "top 95%",     // begin just as the section appears
+              start: "top 95%",    
               end: "top 70%",       // finish expansion quickly
               scrub: true,
               fastScrollEnd: true,  // completes on fast flicks too
@@ -63,7 +63,7 @@ export default function ScrollVideoHero() {
   }, []);
 
   return (
-    // 2) LONGER WATCH TIME: taller section keeps sticky video visible
+  
     <section ref={sectionRef} className="relative w-full h-[220svh]">
       <div className="sticky top-0 h-[100svh] w-full overflow-hidden">
         <motion.div

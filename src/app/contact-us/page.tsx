@@ -132,15 +132,6 @@ const ContactPage = () => {
                                 <p className="text-gray-700">+91 89541 24805</p>
                             </motion.div>
 
-                            <motion.div
-                                className="animate-on-scroll"
-                                whileHover={{ x: 10 }}
-                                transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                            >
-                                <h3 className="text-lg font-semibold text-yellow-500 mb-2">Email</h3>
-                                <p className="text-gray-700">hello@brandmaska.com</p>
-                            </motion.div>
-
                             {/* Decorative elements */}
                             <motion.div
                                 className="mt-12 p-6 bg-yellow-50 rounded-lg border-l-4 border-yellow-500 animate-on-scroll"

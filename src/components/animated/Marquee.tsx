@@ -49,21 +49,21 @@ const Marquee = () => {
             key={index}
             className="flex items-center whitespace-nowrap mx-4"
           >
-            <span className="text-3xl md:text-5xl font-bold text-white [text-shadow:_-2px_-2px_0_#2c313f,2px_-2px_0_#000,-2px_2px_0_#000,2px_2px_0_#000]">
+            <span className="text-2xl md:text-3xl font-bold  text-white [text-shadow:_-2px_-2px_0_#2c313f,2px_-2px_0_#000,-2px_2px_0_#000,2px_2px_0_#000]">
               {item}
             </span>
 
             {index < marqueeItems.length * 2 - 1 && (
               <motion.div
                 className="mx-4 flex items-center justify-center"
-                animate={{ rotate: 360 }}
+                animate={{ rotate: -360 }}
                 transition={{
-                  duration: 4,
+                  duration: 6,
                   repeat: Infinity,
                   ease: "linear",
                 }}
               >
-                
+
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 100 100"
@@ -71,7 +71,7 @@ const Marquee = () => {
                 >
                   <circle cx="50" cy="50" r="12" />
                   {Array.from({ length: 12 }).map((_, i) => {
-                    const angle = (i * 30 * Math.PI) / 180; 
+                    const angle = (i * 30 * Math.PI) / 180;
                     const x1 = 50 + Math.cos(angle) * 18;
                     const y1 = 50 + Math.sin(angle) * 18;
                     const x2 = 50 + Math.cos(angle) * 40;
