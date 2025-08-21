@@ -31,9 +31,9 @@ const LogoMarquee = () => {
 
         <div className="relative mb-8 h-24 overflow-hidden">
 
-          <div className="absolute left-0 top-0 w-24 h-full bg-white z-10" />
+          <div className="absolute left-0 top-0 md:w-24 h-full bg-white z-10" />
 
-          <div className="absolute right-0 top-0 w-24 h-full bg-white z-10" />
+          <div className="absolute right-0 top-0 md:w-24 h-full bg-white z-10" />
 
           <motion.div
             className="flex"
@@ -50,8 +50,8 @@ const LogoMarquee = () => {
             }}
           >
             {logos.map((logo, index) => (
-              <div key={`first-${logo.id}-${index}`} className="flex-shrink-0 mx-8">
-                <div className="relative w-40 h-auto p-4 flex items-center justify-center">
+              <div key={`first-${logo.id}-${index}`} className="flex-shrink-0 md:mx-8">
+                <div className="relative w-36 md:w-40 h-auto p-4 flex items-center justify-center">
                   <Image
                     src={logo.src}
                     alt={logo.alt}

@@ -74,10 +74,10 @@ const AboutPage = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
-          className="max-w-7xl mx-auto"
+          className="container mx-auto"
         >
-          <h1 ref={headingRef} className="text-4xl sm:text-5xl font-bold text-center mb-16 text-black">
-            About <span className="text-yellow-500">BrandMaska</span>
+          <h1 ref={headingRef} className="text-4xl sm:text-5xl font-bold text-center mb-16 text-[#2c313f]">
+            The <span className="text-yellow-500">Team</span>
           </h1>
 
           {/* Centered Image */}
@@ -99,7 +99,7 @@ const AboutPage = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <h2 className="text-3xl font-bold mb-6 text-black">Our Story</h2>
+              <h2 className="text-3xl font-bold mb-6 text-[#2c313f]">Our Story</h2>
               <p className="text-lg text-gray-700 leading-relaxed">
                 BrandMaska was founded with a simple vision: to bridge the gap between creative storytelling
                 and technological innovation. Based in Bengaluru, India's tech capital, we've been helping
@@ -135,7 +135,7 @@ const AboutPage = () => {
 
               {/* Vision Section */}
               <motion.div
-                className="bg-black p-8 rounded-2xl border-l-4 border-yellow-500 animate-on-scroll"
+                className="bg-[#2c313f] p-8 rounded-2xl border-l-4 border-yellow-500 animate-on-scroll"
                 initial={{ opacity: 0, x: 30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}

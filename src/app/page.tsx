@@ -5,6 +5,7 @@ import LogoMarquee from "@/components/animated/LogoMarquee";
 import Marquee from "@/components/animated/Marquee";
 import CaseStudyPage from "@/components/custom/CaseStudy";
 import Hero from "@/components/custom/Hero";
+import TimerSection from "@/components/custom/TimerSection";
 import Video from "@/components/custom/Video";
 import WhatDefinesUs from "@/components/custom/WhatDefinesUs";
 
@@ -17,7 +18,8 @@ export default function Home() {
       <WhatDefinesUs />
       <LogoMarquee />
       <DualImageCarousel />
-      <CaseStudyPage />
+      <TimerSection />
+      {/* <CaseStudyPage /> */}
     </main>
   );
 }

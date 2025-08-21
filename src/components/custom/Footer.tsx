@@ -26,8 +26,6 @@ const Footer = () => {
 
     const quickLinks = [
         { name: "About", href: "/about" },
-        { name: "Our Work", href: "/work" },
-        { name: "Services", href: "/services" },
         { name: "Contact", href: "/contact" }
     ];
 
@@ -112,15 +110,6 @@ const Footer = () => {
                         </h4>
 
                         <div className="space-y-4">
-                            <Link
-                                href="tel:+918954124805"
-                                className="flex items-center text-gray-300 hover:text-gray-400 transition-colors group"
-                            >
-                                <div className="flex items-center justify-center w-8 h-8 bg-gray-100 rounded-full mr-3 group-hover:bg-gray-200 transition-colors">
-                                    <Phone className="h-4 w-4 text-black" />
-                                </div>
-                                <span>+91 89541 24805</span>
-                            </Link>
 
                             <Link
                                 href="mailto:contact@brandmaska.com"
@@ -164,13 +153,13 @@ const Footer = () => {
 
                         <div className="flex items-center space-x-6">
                             <Link
-                                href="/privacy"
+                                href="#privacy"
                                 className="text-sm text-gray-300 hover:text-gray-400 transition-colors"
                             >
                                 Privacy Policy
                             </Link>
                             <Link
-                                href="/terms"
+                                href="#terms"
                                 className="text-sm text-gray-300 hover:text-gray-400 transition-colors"
                             >
                                 Terms of Service

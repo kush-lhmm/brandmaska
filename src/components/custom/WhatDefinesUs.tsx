@@ -2,6 +2,7 @@
 
 import { ArrowRight } from "lucide-react";
 import { useState, useRef, useEffect } from 'react';
+import Link from "next/link";
 
 const WhatDefinesUs = () => {
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
@@ -39,7 +40,7 @@ const WhatDefinesUs = () => {
 
   return (
     <section ref={sectionRef} className="relative bg-[#f0ef2c] overflow-hidden">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8 py-16 md:py-24">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8 py-16">
         <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-start">
          
           <div className="flex flex-col space-y-10">
@@ -73,12 +74,12 @@ const WhatDefinesUs = () => {
             </p>
 
             <div className="mt-6">
-              <a
-                href="#culture"
+              <Link
+                href="/contact-us"
                 className="inline-flex items-center justify-center rounded-full bg-[#2c313f] px-6 sm:px-8 py-3 text-white text-sm sm:text-base font-semibold transition-colors hover:bg-gray-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-black/40"
               >
                 Complete Our Outline →
-              </a>
+              </Link>
             </div>
           </div>
         </div>

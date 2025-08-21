@@ -1,4 +1,3 @@
-// app/contact/page.tsx (or wherever your ContactPage lives)
 "use client";
 
 import { useRef, useEffect, useState } from "react";
@@ -7,13 +6,11 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import Head from "next/head";
 
-// Register GSAP plugins
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-// Loose validation to allow international formats like +91 98765 43210, (xxx) xxx-xxxx, etc.
 const phoneRegex = /^\+?[()\-\s\d]{7,20}$/;
 
 type FormState = {
@@ -21,13 +18,13 @@ type FormState = {
   email: string;
   phone: string;
   message: string;
-  honeypot: string; // spam trap
+  honeypot: string; 
 };
 
 type FieldErrors = Partial<Record<keyof FormState, string>>;
 
 const ContactPage = () => {
-  // Refs for animations
+
   const formRef = useRef<HTMLFormElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
@@ -35,7 +32,6 @@ const ContactPage = () => {
   const formContainerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<HTMLDivElement>(null);
 
-  // UI state
   const [form, setForm] = useState<FormState>({
     name: "",
     email: "",
@@ -48,35 +44,31 @@ const ContactPage = () => {
   const [banner, setBanner] = useState<{ type: "success" | "error"; text: string } | null>(null);
 
   useEffect(() => {
-    // Animate page entrance
+    
     gsap.fromTo(
       containerRef.current,
       { opacity: 0, y: 20 },
       { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }
     );
 
-    // Animate heading
     gsap.fromTo(
       headingRef.current,
       { opacity: 0, y: -30 },
       { opacity: 1, y: 0, duration: 0.8, delay: 0.3, ease: "power3.out" }
     );
 
-    // Animate info section
     gsap.fromTo(
       infoRef.current,
       { opacity: 0, x: -30 },
       { opacity: 1, x: 0, duration: 0.8, delay: 0.5, ease: "power3.out" }
     );
 
-    // Animate form container
     gsap.fromTo(
       formContainerRef.current,
       { opacity: 0, x: 30 },
       { opacity: 1, x: 0, duration: 0.8, delay: 0.7, ease: "power3.out" }
     );
 
-    // Scroll animations for elements
     gsap.utils.toArray(".animate-on-scroll").forEach((element: any) => {
       gsap.fromTo(
         element,
@@ -110,7 +102,7 @@ const ContactPage = () => {
     (ev: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       setForm((s) => ({ ...s, [key]: ev.target.value }));
       if (errors[key]) {
-        // live-clear the error for this field
+        
         setErrors((e) => {
           const { [key]: _, ...rest } = e;
           return rest;
@@ -126,7 +118,6 @@ const ContactPage = () => {
     setErrors(v);
     if (Object.keys(v).length > 0) return;
 
-    // Form submission animation
     gsap.to(formRef.current, {
       y: -10,
       duration: 0.2,
@@ -197,7 +188,7 @@ const ContactPage = () => {
           )}
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            {/* Contact Information */}
+          
             <div ref={infoRef} className="space-y-8">
               <motion.div
                 className="animate-on-scroll"
@@ -227,31 +218,28 @@ const ContactPage = () => {
               </motion.div>
 
               <motion.div
-                className="animate-on-scroll"
-                whileHover={{ x: 10 }}
-                transition={{ type: "spring", stiffness: 400, damping: 10 }}
-              >
-                <h3 className="text-lg font-semibold text-yellow-500 mb-2">Phone</h3>
-                <p className="text-gray-700">+91 89541 24805</p>
-              </motion.div>
-
-              {/* Decorative elements */}
-              <motion.div
-                className="mt-12 p-6 bg-yellow-50 rounded-lg border-l-4 border-yellow-500 animate-on-scroll"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.4 }}
-              >
-                <h3 className="text-lg font-semibold text-black mb-2">Why work with us?</h3>
-                <p className="text-gray-700">
-                  We combine creative thinking with technical expertise to deliver solutions that not
-                  only look great but perform exceptionally.
-                </p>
-              </motion.div>
+            ref={mapRef}
+            className="mt-10 rounded-2xl overflow-hidden shadow-xl animate-on-scroll"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <div className="w-full h-120 rounded-2xl overflow-hidden">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m23!1m12!1m3!1d43987.52955780919!2d77.68836618556982!3d12.972807599101074!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m8!3e6!4m5!1s0x3bae13da1086999f%3A0x2dbae0abf3477c3c!2s3rdFloor%2C%20Room%20no%2029%2C%20P2%20unispace%2C%20Plot%20No%3A%20128%2C%20EPIP%20Zone%20Whitefield%20Rd%2C%20near%20Ginger%20Hotel%2C%20EPIP%20Zone%2C%20Brookefield%2C%20Bengaluru%2C%20Karnataka%20560066!3m2!1d12.9727027!2d77.7177753!4m0!5e0!3m2!1sen!2sin!4v1755696424864!5m2!1sen!2sin"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="rounded-2xl"
+              />
+            </div>
+          </motion.div>
             </div>
 
-            {/* Contact Form Container */}
             <motion.div
               ref={formContainerRef}
               className="bg-[#2c313f] p-8 rounded-2xl shadow-xl animate-on-scroll"
@@ -261,7 +249,7 @@ const ContactPage = () => {
               <h2 className="text-2xl font-bold mb-6 text-white">Send us a message</h2>
 
               <form ref={formRef} onSubmit={handleSubmit} className="space-y-6" noValidate>
-                {/* Honeypot (hidden) */}
+          
                 <input
                   type="text"
                   name="company"
@@ -413,29 +401,7 @@ const ContactPage = () => {
               </form>
             </motion.div>
           </div>
-
-          {/* Map Section */}
-          <motion.div
-            ref={mapRef}
-            className="mt-20 rounded-2xl overflow-hidden shadow-xl animate-on-scroll"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            <div className="w-full h-96 rounded-2xl overflow-hidden">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m23!1m12!1m3!1d43987.52955780919!2d77.68836618556982!3d12.972807599101074!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m8!3e6!4m5!1s0x3bae13da1086999f%3A0x2dbae0abf3477c3c!2s3rdFloor%2C%20Room%20no%2029%2C%20P2%20unispace%2C%20Plot%20No%3A%20128%2C%20EPIP%20Zone%20Whitefield%20Rd%2C%20near%20Ginger%20Hotel%2C%20EPIP%20Zone%2C%20Brookefield%2C%20Bengaluru%2C%20Karnataka%20560066!3m2!1d12.9727027!2d77.7177753!4m0!5e0!3m2!1sen!2sin!4v1755696424864!5m2!1sen!2sin"
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className="rounded-2xl"
-              />
-            </div>
-          </motion.div>
+          
         </motion.div>
       </div>
     </>

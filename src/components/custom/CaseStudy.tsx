@@ -199,7 +199,7 @@ const CaseStudy = () => {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
                     
                     {/* Impact Badge */}
-                    <div className="absolute top-6 left-6 bg-[#f0ef2c] text-gray-800 px-4 py-2 rounded-full font-bold">
+                    <div className="absolute top-6 left-6 bg-white text-gray-800 px-4 py-2 rounded-full font-bold">
                       <div className="flex items-center gap-2">
                         <TrendingUp className="h-4 w-4" />
                         <span className="text-lg">{caseStudies[currentIndex].impact}</span>
