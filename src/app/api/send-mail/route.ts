@@ -12,35 +12,38 @@ const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
     user: EMAIL_USER,
-    pass: EMAIL_PASS, 
+    pass: EMAIL_PASS,
   },
 });
 
 type ContactPayload = {
-  name: string;   
+  name: string;
   email: string;
-  phone?: string;    
+  phone?: string;
   message: string;
 };
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-const phoneRegex =
-  /^\+?[()\-\s\d]{7,20}$/;
+const phoneRegex = /^\+?[()\-\s\d]{7,20}$/;
 
 function sanitize(input: string) {
   return input.replace(/[\r\n\t]+/g, " ").trim();
 }
 
-function validateBody(body: any): { ok: true; data: ContactPayload } | { ok: false; error: string } {
+function validateBody(
+  body: any,
+): { ok: true; data: ContactPayload } | { ok: false; error: string } {
   if (!body || typeof body !== "object") {
     return { ok: false, error: "Invalid JSON body." };
   }
 
   const name = typeof body.name === "string" ? sanitize(body.name) : "";
   const email = typeof body.email === "string" ? sanitize(body.email) : "";
-  const phone = typeof body.phone === "string" ? sanitize(body.phone) : undefined;
-  const message = typeof body.message === "string" ? sanitize(body.message) : "";
+  const phone =
+    typeof body.phone === "string" ? sanitize(body.phone) : undefined;
+  const message =
+    typeof body.message === "string" ? sanitize(body.message) : "";
 
   if (!name || !email || !message) {
     return { ok: false, error: "Name, email, and message are required." };
@@ -89,22 +92,25 @@ export async function POST(request: Request) {
     `;
 
     const mailOptions = {
-      from: EMAIL_USER,
-      to: "support@diffrun.com",
+      from: `"${name} via BrandMaska" <${EMAIL_USER}>`,
+      to: EMAIL_USER,
       subject: `New Message from ${name}`,
       text: textLines,
       html,
-      replyTo: email, 
+      replyTo: email,
     };
 
     await transporter.sendMail(mailOptions);
 
-    return NextResponse.json({ message: "Email sent successfully!" }, { status: 200 });
+    return NextResponse.json(
+      { message: "Email sent successfully!" },
+      { status: 200 },
+    );
   } catch (err) {
     console.error("Error sending email:", err);
     return NextResponse.json(
       { error: "Failed to send email. Please try again later." },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

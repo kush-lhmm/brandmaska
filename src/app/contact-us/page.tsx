@@ -189,19 +189,6 @@ const ContactPage = () => {
             Let&apos;s <span className="text-yellow-500">Connect</span>
           </h1>
 
-          {banner && (
-            <div
-              role="alert"
-              className={`mb-8 rounded-lg p-4 border ${
-                banner.type === "success"
-                  ? "bg-green-50 border-green-200 text-green-800"
-                  : "bg-red-50 border-red-200 text-red-800"
-              }`}
-            >
-              {banner.text}
-            </div>
-          )}
-
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             <div ref={infoRef} className="space-y-8">
               <motion.div
@@ -449,6 +436,20 @@ const ContactPage = () => {
                     </>
                   )}
                 </motion.button>
+
+                {banner && (
+                  <div
+                    role="alert"
+                    aria-live="polite"
+                    className={`rounded-lg p-4 border text-sm font-medium ${
+                      banner.type === "success"
+                        ? "bg-green-50 border-green-200 text-green-800"
+                        : "bg-red-50 border-red-200 text-red-800"
+                    }`}
+                  >
+                    {banner.text}
+                  </div>
+                )}
               </form>
             </motion.div>
           </div>

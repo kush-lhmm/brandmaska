@@ -1,0 +1,27 @@
+# systemd unit for the Brandmaska Next.js site
+# Install: sudo cp /srv/brandmaska/deploy/brandmaska.service /etc/systemd/system/
+#
+# Before installing, check two things on the server:
+#   1. Port 3010 is free:  sudo ss -tlnp | grep ':3010 '   (no output = free)
+#      If it is taken, change PORT below AND proxy_pass in deploy/brandmaska.nginx.conf.
+#   2. Node's path:        sudo -u diffrun -H bash -lc 'which node'
+#      If it is not /usr/bin/node, change ExecStart below.
+
+[Unit]
+Description=Brandmaska Next.js site
+After=network.target
+
+[Service]
+Type=simple
+User=diffrun
+Group=diffrun
+WorkingDirectory=/srv/brandmaska
+Environment=NODE_ENV=production
+Environment=PORT=3010
+Environment=HOSTNAME=127.0.0.1
+ExecStart=/usr/bin/node /srv/brandmaska/node_modules/next/dist/bin/next start -p ${PORT} -H ${HOSTNAME}
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
