@@ -1,3 +1,4 @@
+// src/app/contact-us/page.tsx
 "use client";
 
 import { useRef, useEffect, useState } from "react";
@@ -18,13 +19,12 @@ type FormState = {
   email: string;
   phone: string;
   message: string;
-  honeypot: string; 
+  honeypot: string;
 };
 
 type FieldErrors = Partial<Record<keyof FormState, string>>;
 
 const ContactPage = () => {
-
   const formRef = useRef<HTMLFormElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
@@ -41,32 +41,34 @@ const ContactPage = () => {
   });
   const [errors, setErrors] = useState<FieldErrors>({});
   const [submitting, setSubmitting] = useState(false);
-  const [banner, setBanner] = useState<{ type: "success" | "error"; text: string } | null>(null);
+  const [banner, setBanner] = useState<{
+    type: "success" | "error";
+    text: string;
+  } | null>(null);
 
   useEffect(() => {
-    
     gsap.fromTo(
       containerRef.current,
       { opacity: 0, y: 20 },
-      { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }
+      { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" },
     );
 
     gsap.fromTo(
       headingRef.current,
       { opacity: 0, y: -30 },
-      { opacity: 1, y: 0, duration: 0.8, delay: 0.3, ease: "power3.out" }
+      { opacity: 1, y: 0, duration: 0.8, delay: 0.3, ease: "power3.out" },
     );
 
     gsap.fromTo(
       infoRef.current,
       { opacity: 0, x: -30 },
-      { opacity: 1, x: 0, duration: 0.8, delay: 0.5, ease: "power3.out" }
+      { opacity: 1, x: 0, duration: 0.8, delay: 0.5, ease: "power3.out" },
     );
 
     gsap.fromTo(
       formContainerRef.current,
       { opacity: 0, x: 30 },
-      { opacity: 1, x: 0, duration: 0.8, delay: 0.7, ease: "power3.out" }
+      { opacity: 1, x: 0, duration: 0.8, delay: 0.7, ease: "power3.out" },
     );
 
     gsap.utils.toArray(".animate-on-scroll").forEach((element: any) => {
@@ -82,7 +84,7 @@ const ContactPage = () => {
             start: "top 80%",
             toggleActions: "play none none reverse",
           },
-        }
+        },
       );
     });
   }, []);
@@ -91,18 +93,19 @@ const ContactPage = () => {
     const e: FieldErrors = {};
     if (!state.name.trim()) e.name = "Full name is required.";
     if (!emailRegex.test(state.email.trim())) e.email = "Enter a valid email.";
-    if (state.phone.trim() && !phoneRegex.test(state.phone.trim())) e.phone = "Enter a valid phone.";
-    if (state.message.trim().length < 10) e.message = "Message should be at least 10 characters.";
+    if (state.phone.trim() && !phoneRegex.test(state.phone.trim()))
+      e.phone = "Enter a valid phone.";
+    if (state.message.trim().length < 10)
+      e.message = "Message should be at least 10 characters.";
     if (state.honeypot) e.honeypot = "Spam detected.";
     return e;
-    };
+  };
 
   const handleChange =
     (key: keyof FormState) =>
     (ev: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       setForm((s) => ({ ...s, [key]: ev.target.value }));
       if (errors[key]) {
-        
         setErrors((e) => {
           const { [key]: _, ...rest } = e;
           return rest;
@@ -134,7 +137,7 @@ const ContactPage = () => {
         body: JSON.stringify({
           name: form.name.trim(),
           email: form.email.trim(),
-          phone: form.phone.trim() || undefined, 
+          phone: form.phone.trim() || undefined,
           message: form.message.trim(),
         }),
       });
@@ -144,10 +147,16 @@ const ContactPage = () => {
         throw new Error(data?.error || "Failed to send email.");
       }
 
-      setBanner({ type: "success", text: "Thanks! Your message has been sent." });
+      setBanner({
+        type: "success",
+        text: "Thanks! Your message has been sent.",
+      });
       setForm({ name: "", email: "", phone: "", message: "", honeypot: "" });
     } catch (err: any) {
-      setBanner({ type: "error", text: err?.message || "Something went wrong. Please try again." });
+      setBanner({
+        type: "error",
+        text: err?.message || "Something went wrong. Please try again.",
+      });
     } finally {
       setSubmitting(false);
     }
@@ -163,14 +172,20 @@ const ContactPage = () => {
         />
       </Head>
 
-      <div ref={containerRef} className="min-h-screen bg-white pt-14 pb-16 px-4 sm:px-6 lg:px-8">
+      <div
+        ref={containerRef}
+        className="min-h-screen bg-white pt-14 pb-16 px-4 sm:px-6 lg:px-8"
+      >
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
           className="max-w-7xl mx-auto"
         >
-          <h1 ref={headingRef} className="text-4xl sm:text-5xl font-bold text-center mb-16 text-black">
+          <h1
+            ref={headingRef}
+            className="text-4xl sm:text-5xl font-bold text-center mb-16 text-black"
+          >
             Let&apos;s <span className="text-yellow-500">Connect</span>
           </h1>
 
@@ -188,17 +203,19 @@ const ContactPage = () => {
           )}
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          
             <div ref={infoRef} className="space-y-8">
               <motion.div
                 className="animate-on-scroll"
                 whileHover={{ scale: 1.02 }}
                 transition={{ type: "spring", stiffness: 400, damping: 10 }}
               >
-                <h2 className="text-2xl font-bold mb-6 text-black">Get in touch</h2>
+                <h2 className="text-2xl font-bold mb-6 text-black">
+                  Get in touch
+                </h2>
                 <p className="text-gray-700 mb-8">
-                  Have a project in mind? Want to explore how we can help your brand? Reach out to us
-                  and let&apos;s create something amazing together.
+                  Have a project in mind? Want to explore how we can help your
+                  brand? Reach out to us and let&apos;s create something amazing
+                  together.
                 </p>
               </motion.div>
 
@@ -207,37 +224,39 @@ const ContactPage = () => {
                 whileHover={{ x: 10 }}
                 transition={{ type: "spring", stiffness: 400, damping: 10 }}
               >
-                <h3 className="text-lg font-semibold text-yellow-500 mb-2">Bengaluru Office</h3>
+                <h3 className="text-lg font-semibold text-yellow-500 mb-2">
+                  Bengaluru Office
+                </h3>
                 <p className="text-gray-700">
-                  3rd Floor, Room no 29, P2 Unispace
+                  Sattva GR Tech Park, Whitefield Main Road
                   <br />
-                  EPIP Zone Whitefield Road, Brookefield
+                  Pattandur Agrahara, Whitefield
                   <br />
                   Bengaluru, Karnataka 560066
                 </p>
               </motion.div>
 
               <motion.div
-            ref={mapRef}
-            className="mt-10 rounded-2xl overflow-hidden shadow-xl animate-on-scroll"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            <div className="w-full h-120 rounded-2xl overflow-hidden">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m23!1m12!1m3!1d43987.52955780919!2d77.68836618556982!3d12.972807599101074!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m8!3e6!4m5!1s0x3bae13da1086999f%3A0x2dbae0abf3477c3c!2s3rdFloor%2C%20Room%20no%2029%2C%20P2%20unispace%2C%20Plot%20No%3A%20128%2C%20EPIP%20Zone%20Whitefield%20Rd%2C%20near%20Ginger%20Hotel%2C%20EPIP%20Zone%2C%20Brookefield%2C%20Bengaluru%2C%20Karnataka%20560066!3m2!1d12.9727027!2d77.7177753!4m0!5e0!3m2!1sen!2sin!4v1755696424864!5m2!1sen!2sin"
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className="rounded-2xl"
-              />
-            </div>
-          </motion.div>
+                ref={mapRef}
+                className="mt-10 rounded-2xl overflow-hidden shadow-xl animate-on-scroll"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8 }}
+              >
+                <div className="w-full h-120 rounded-2xl overflow-hidden">
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m23!1m12!1m3!1d62204.46998681059!2d77.7355264!3d12.985958399999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m8!3e6!4m0!4m5!1s0x3bae1170880ae38d%3A0x47d47552504d7117!2sSattva%20Tech%20Park%2C%20Whitefield%20Main%20Rd%2C%20Pattandur%20Agrahara%2C%20Whitefield%2C%20Bengaluru%2C%20Karnataka%20560066!3m2!1d12.986417999999999!2d77.7432472!5e0!3m2!1sen!2sin!4v1794378830401!5m2!1sen!2sin"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    className="rounded-2xl"
+                  />
+                </div>
+              </motion.div>
             </div>
 
             <motion.div
@@ -246,10 +265,16 @@ const ContactPage = () => {
               whileHover={{ y: -5 }}
               transition={{ type: "spring", stiffness: 300, damping: 15 }}
             >
-              <h2 className="text-2xl font-bold mb-6 text-white">Send us a message</h2>
+              <h2 className="text-2xl font-bold mb-6 text-white">
+                Send us a message
+              </h2>
 
-              <form ref={formRef} onSubmit={handleSubmit} className="space-y-6" noValidate>
-          
+              <form
+                ref={formRef}
+                onSubmit={handleSubmit}
+                className="space-y-6"
+                noValidate
+              >
                 <input
                   type="text"
                   name="company"
@@ -261,7 +286,10 @@ const ContactPage = () => {
                 />
 
                 <motion.div className="animate-on-scroll">
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
+                  <label
+                    htmlFor="name"
+                    className="block text-sm font-medium text-gray-300 mb-2"
+                  >
                     Full Name
                   </label>
                   <input
@@ -286,7 +314,10 @@ const ContactPage = () => {
                 </motion.div>
 
                 <motion.div className="animate-on-scroll">
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-medium text-gray-300 mb-2"
+                  >
                     Email Address
                   </label>
                   <input
@@ -311,7 +342,10 @@ const ContactPage = () => {
                 </motion.div>
 
                 <motion.div className="animate-on-scroll">
-                  <label htmlFor="phone" className="block text-sm font-medium text-gray-300 mb-2">
+                  <label
+                    htmlFor="phone"
+                    className="block text-sm font-medium text-gray-300 mb-2"
+                  >
                     Phone Number <span className="opacity-60">(optional)</span>
                   </label>
                   <input
@@ -335,7 +369,10 @@ const ContactPage = () => {
                 </motion.div>
 
                 <motion.div className="animate-on-scroll">
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
+                  <label
+                    htmlFor="message"
+                    className="block text-sm font-medium text-gray-300 mb-2"
+                  >
                     Your Message
                   </label>
                   <textarea
@@ -350,7 +387,9 @@ const ContactPage = () => {
                     }`}
                     placeholder="Tell us about your project..."
                     aria-invalid={!!errors.message}
-                    aria-describedby={errors.message ? "message-error" : undefined}
+                    aria-describedby={
+                      errors.message ? "message-error" : undefined
+                    }
                   />
                   {errors.message && (
                     <p id="message-error" className="mt-2 text-sm text-red-400">
@@ -374,7 +413,14 @@ const ContactPage = () => {
                         fill="none"
                         viewBox="0 0 24 24"
                       >
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                        <circle
+                          className="opacity-25"
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="currentColor"
+                          strokeWidth="4"
+                        />
                         <path
                           className="opacity-75"
                           fill="currentColor"
@@ -393,7 +439,12 @@ const ContactPage = () => {
                         viewBox="0 0 24 24"
                         xmlns="http://www.w3.org/2000/svg"
                       >
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M14 5l7 7m0 0l-7 7m7-7H3"
+                        />
                       </svg>
                     </>
                   )}
@@ -401,7 +452,6 @@ const ContactPage = () => {
               </form>
             </motion.div>
           </div>
-          
         </motion.div>
       </div>
     </>
