@@ -130,8 +130,8 @@ const Footer = () => {
                                 <div>
                                     <h5 className="font-medium text-gray-100 mb-1">Bengaluru Office</h5>
                                     <address className="not-italic text-sm text-gray-300 leading-relaxed">
-                                        3rd Floor, Room no 29, P2 Unispace<br />
-                                        EPIP Zone Whitefield Road, Brookefield<br />
+                                        Sattva GR Tech Park, Whitefield Main Road<br />
+                                        Pattandur Agrahara, Whitefield<br />
                                         Bengaluru, Karnataka 560066
                                     </address>
                                 </div>
